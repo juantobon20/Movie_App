@@ -4,11 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="adapter"
-            type="com.appinc.movieapp.views.detailMovie.DetailMovieAdapter" />
-
         <variable
             name="viewModel"
             type="com.appinc.movieapp.views.detailMovie.DetailMovieViewModel" />
@@ -41,6 +36,7 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
+                    app:title="Detail Movie"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -75,12 +71,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="8.5/10" />
+                    tools:text="8.5/10"
+                    tools:voteCount="@{viewModel.movie.voteAverage}" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="$500.000.000" />
+                    tools:priceFormat="@{viewModel.movie.budget}"
+                    tools:text="$500.000.000" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -106,16 +104,17 @@
                     tools:isVisibleFromList="@{viewModel.videos}" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcVideo"
+                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:orientation="horizontal"
+                    tools:isVisibleFromList="@{viewModel.videos}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:setAdapter="@{adapter}"
-                    tools:submitList="@{viewModel.videos}"
                     tools:listitem="@layout/item_card_preview_youtube" />
             </LinearLayout>
 

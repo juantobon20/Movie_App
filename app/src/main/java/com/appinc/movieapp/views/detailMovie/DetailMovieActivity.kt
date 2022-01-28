@@ -14,6 +14,7 @@ class DetailMovieActivity : AppCompatActivity() {
     private var _binding: ActivityDetailMovieBinding? = null
     private lateinit var viewModel: DetailMovieViewModel
 
+    private val adapter: DetailMovieAdapter by lazy { DetailMovieAdapter() }
 
     private val movieId: Int by lazy {
         intent.extras?.takeIf { it.containsKey(MOVIE_ID_KEY) }?.apply {
@@ -28,18 +29,17 @@ class DetailMovieActivity : AppCompatActivity() {
         setSupportActionBar(this._binding?.toolbar)
         setContentView(this._binding?.root)
 
-        /*supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }*/
-
         this.viewModel = ViewModelProvider(this)[DetailMovieViewModel::class.java]
         this.viewModel.onLoadDetailMovie(movieId)
 
         this._binding?.apply {
             viewModel = this@DetailMovieActivity.viewModel
-            adapter = DetailMovieAdapter()
             lifecycleOwner = this@DetailMovieActivity
+            rcVideo.adapter = this@DetailMovieActivity.adapter
+        }
+
+        this.viewModel.videos.observe(this) {
+            this.adapter.onLoad(it)
         }
     }
 

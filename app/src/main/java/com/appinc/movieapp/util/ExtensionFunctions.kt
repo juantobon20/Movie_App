@@ -2,6 +2,7 @@ package com.appinc.movieapp.util
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,7 @@ import com.appinc.movieapp.R
 import com.appinc.movieapp.URL_IMAGE
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import java.text.NumberFormat
 
 @BindingAdapter("onLoadUrl")
 fun ImageView.onLoadUrl(url: String?) {
@@ -34,16 +35,6 @@ fun setAdapter(
     }
 }
 
-@BindingAdapter("isVisibleFromList")
-fun View.isVisible(list: List<Nothing>?) {
-    this.isVisible = !list.isNullOrEmpty()
-}
-
-@BindingAdapter("isFavorite")
-fun FloatingActionButton.isFavorite(isFavorite: Boolean){
-    this.setImageResource(if (isFavorite) R.drawable.heart_2 else R.drawable.heart)
-}
-
 @BindingAdapter("submitList")
 fun submitList(recyclerView: RecyclerView, list: List<Nothing>?) {
     if (list.isNullOrEmpty()) return
@@ -52,7 +43,25 @@ fun submitList(recyclerView: RecyclerView, list: List<Nothing>?) {
     adapter?.loadData(list)
 }
 
-@BindingAdapter("setVideoId")
-fun YouTubePlayerView.setVideoId(videoId: String){
-    this.setVideoId(videoId)
+@BindingAdapter("isVisibleFromList")
+fun View.isVisible(list: List<Nothing>?) {
+    this.isVisible = !list.isNullOrEmpty()
+}
+
+@BindingAdapter("isFavorite")
+fun FloatingActionButton.isFavorite(isFavorite: Boolean) {
+    this.setImageResource(if (isFavorite) R.drawable.heart_2 else R.drawable.heart)
+}
+
+@BindingAdapter("voteCount")
+fun TextView.voteCount(voteCount: Double) {
+    val text = "$voteCount / 10"
+    this.text = text
+}
+
+@BindingAdapter("priceFormat")
+fun TextView.priceFormat(price: Int) {
+    this.text = NumberFormat.getCurrencyInstance().apply {
+        maximumFractionDigits = 0
+    }.format(price)
 }

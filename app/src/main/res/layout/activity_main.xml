@@ -19,6 +19,18 @@
         android:layout_height="match_parent"
         tools:context=".views.main.MainActivity">
 
+        <CheckBox
+            android:id="@+id/cbHide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            tools:isVisibleFromList="@{viewModel.movies}"
+            android:checked="@{viewModel.isFilter}"
+            android:onClick="@{() -> viewModel.onFilter()}"
+            android:text="@string/mostrar_todas_las_peliculas"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -27,7 +39,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cbHide"
             tools:setAdapter="@{adapter}"
             tools:submitList="@{viewModel.movies}"
             tools:listitem="@layout/item_card_movie" />

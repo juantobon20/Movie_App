@@ -1,5 +1,6 @@
 package com.appinc.movieapp.util
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -16,9 +17,10 @@ abstract class BaseAdapter<BINDING : ViewDataBinding, T>(
 
     abstract fun bind(binding: BINDING, item: T)
 
+    @SuppressLint("NotifyDataSetChanged")
     fun loadData(list: List<T>) {
         this.data = list.toMutableList()
-        notifyItemRangeInserted(0, list.size - 1)
+        notifyDataSetChanged()
     }
 
 

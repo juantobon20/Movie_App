@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    app:cardCornerRadius="15dp">
 
-    <data>
-
-        <variable
-            name="video"
-            type="com.appinc.movieapp.data.model.Video" />
-    </data>
-
-    <androidx.cardview.widget.CardView
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/youtubePlayer"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        app:cardCornerRadius="15dp">
-
-        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:videoId="S0Q4gqBUs7c" />
-    </androidx.cardview.widget.CardView>
-</layout>
+        android:layout_height="200dp" />
+</androidx.cardview.widget.CardView>

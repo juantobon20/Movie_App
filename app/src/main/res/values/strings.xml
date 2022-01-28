@@ -9,4 +9,7 @@
     <string name="movie_detail">Movie Detail</string>
     <string name="summary">Summary</string>
     <string name="trailers">Trailers</string>
+    <string name="mostrar_todas_las_peliculas">Mostrar todas las peliculas</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="populares">Populares</string>
 </resources>

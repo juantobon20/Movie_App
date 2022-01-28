@@ -2,8 +2,11 @@ package com.appinc.movieapp.views.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.appinc.movieapp.R
 import com.appinc.movieapp.databinding.ActivityMainBinding
 import com.appinc.movieapp.views.detailMovie.DetailMovieActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +36,21 @@ class MainActivity : AppCompatActivity() {
                 putExtra("movieId", it)
             })
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_filter, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        item.isChecked = true
+        when(item.itemId) {
+            R.id.op_favorite -> {
+                viewModel.onFilterFavorite()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
