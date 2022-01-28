@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Movie App</string>
+    <string name="by_juan_tobon">by Juan Tobon</string>
+    <string name="poster_picture">Poster picture</string>
+    <string name="movie">Movie</string>
+    <string name="populate">10000</string>
+    <string name="image_movie">Image Movie</string>
+    <string name="favourite">Favorite</string>
+    <string name="movie_detail">Movie Detail</string>
+    <string name="summary">Summary</string>
+    <string name="trailers">Trailers</string>
 </resources>

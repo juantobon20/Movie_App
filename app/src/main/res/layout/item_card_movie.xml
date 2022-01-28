@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedAttribute">
+
+    <data>
+
+        <variable
+            name="movie"
+            type="com.appinc.movieapp.data.model.Movie" />
+
+        <variable
+            name="listener"
+            type="com.appinc.movieapp.util.IOnClickListener" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        android:onClick="@{ () -> listener.onClick(movie)}">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/poster_picture"
+            android:scaleType="centerCrop"
+            tools:onLoadUrl="@{movie.posterPath}"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imageView"
+            android:background="@color/blackTransparent"
+            android:gravity="center"
+            android:maxLines="3"
+            android:padding="15dp"
+            android:text="@{movie.title}"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            tools:text="@string/movie" />
+    </RelativeLayout>
+</layout>
