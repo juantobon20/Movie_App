@@ -29,7 +29,7 @@ class MainViewModel @Inject constructor(private val getMovieUseCase: GetMovieUse
         this.onLoadMovies()
     }
 
-    private fun onLoadMovies() {
+    fun onLoadMovies() {
         viewModelScope.launch {
             val movies = getMovieUseCase()
             this@MainViewModel._movies.postValue(movies)
