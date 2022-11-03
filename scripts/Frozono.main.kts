@@ -28,7 +28,7 @@ val token = getArgument("--token")
 val WebHookUrl = getArgument("--webhook")
 val Repository = "https://$token@$RepositoryUriAppendix"
 val CurrentVersion = Version.createFromProperties()
-val SourceBranch = "develop"
+val SourceBranch = "master"
 
 Hermes.display("current version: $CurrentVersion")
 

@@ -8,7 +8,6 @@ import Constants.PROPERTIES_FILE
 import Constants.VERSION_FILE
 import java.io.File
 
-
 object Constants {
     const val MAJOR = "versionMajor"
     const val MINOR = "versionMinor"
@@ -55,9 +54,8 @@ object VersionUpdated {
         )
     }
 
-    fun createVersionFile(){
+    fun createVersionFile() {
         val file = File(VERSION_FILE)
         file.writeText(getCurrentVersion().getVersionName())
     }
 }
-
