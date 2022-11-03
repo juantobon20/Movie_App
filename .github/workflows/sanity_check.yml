@@ -57,3 +57,30 @@ jobs:
         id: set_output
         if: always()
         run: echo ::set-output name=status::${{ job.status }}
+
+notification:
+    runs-on: ubuntu-latest
+    needs: [ assemble, run_linter, run_unit_tests ]
+    if: always()
+    steps:
+      - name: Slack Notification
+        if: ${{ needs.assemble.outputs.status == 'success' && needs.run_linter.outputs.status == 'success' && needs.run_unit_tests.outputs.status == 'success' }}
+        uses: rtCamp/action-slack-notify@v2.0.2
+        env:
+          SLACK_CHANNEL: android
+          SLACK_COLOR: '#008000'
+          SLACK_MESSAGE: 'Sanity check successful ${{ github.head_ref }}'
+          SLACK_TITLE: 'Sanity Check'
+          SLACK_USERNAME: bot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Slack Notification
+        if: ${{ needs.assemble.outputs.status != 'success' || needs.run_linter.outputs.status != 'success' || needs.run_unit_tests.outputs.status != 'success' }}
+        uses: rtCamp/action-slack-notify@v2.0.2
+        env:
+          SLACK_CHANNEL: android
+          SLACK_COLOR: '#FF0000'
+          SLACK_MESSAGE: 'Sanity check failed ${{ github.head_ref }}'
+          SLACK_TITLE: 'Sanity Check'
+          SLACK_USERNAME: bot
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
