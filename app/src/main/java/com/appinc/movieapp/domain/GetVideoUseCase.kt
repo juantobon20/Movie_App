@@ -10,8 +10,8 @@ class GetVideoUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(movieId: Int): List<Video> {
-      val videos = repositoryImp.getVideos(movieId)
-      videos.forEach { it.movieId = movieId; saveVideoUseCase.invoke(it) }
-      return videos
+        val videos = repositoryImp.getVideos(movieId)
+        videos.forEach { it.movieId = movieId; saveVideoUseCase.invoke(it) }
+        return videos
     }
 }

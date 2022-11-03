@@ -1,8 +1,8 @@
 package com.appinc.movieapp.views.splash
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.appinc.movieapp.databinding.ActivitySplashBinding
 import com.appinc.movieapp.views.main.MainActivity
@@ -24,7 +24,6 @@ class SplashActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-
     }
 
     override fun onDestroy() {

@@ -3,8 +3,6 @@ package com.appinc.movieapp.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import javax.inject.Inject
-import javax.inject.Singleton
 
 @Entity(tableName = "Movie")
 data class Movie(

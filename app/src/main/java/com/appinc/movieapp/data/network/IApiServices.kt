@@ -12,8 +12,8 @@ interface IApiServices {
     suspend fun getPopularMovie(@Query("api_key") apiKey: String = APIKEY): MovieResponse
 
     @GET("movie/{id}")
-    suspend fun getMovie(@Path("id") id : Int, @Query("api_key") apiKey: String = APIKEY): Movie
+    suspend fun getMovie(@Path("id") id: Int, @Query("api_key") apiKey: String = APIKEY): Movie
 
     @GET("movie/{movieId}/videos")
-    suspend fun getVideos(@Path("movieId") movieId : Int, @Query("api_key") apiKey: String = APIKEY): VideoResponse
+    suspend fun getVideos(@Path("movieId") movieId: Int, @Query("api_key") apiKey: String = APIKEY): VideoResponse
 }

@@ -1,6 +1,9 @@
 package com.appinc.movieapp.data.dao
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.appinc.movieapp.data.model.Movie
 
 @Dao

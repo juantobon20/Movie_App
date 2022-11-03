@@ -23,7 +23,6 @@ abstract class BaseAdapter<BINDING : ViewDataBinding, T>(
         notifyDataSetChanged()
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<BINDING> {
         val binder = DataBindingUtil.inflate<BINDING>(
             LayoutInflater.from(parent.context),
@@ -43,9 +42,8 @@ abstract class BaseAdapter<BINDING : ViewDataBinding, T>(
 }
 
 class BaseViewHolder<BINDING : ViewDataBinding>(val binder: BINDING) :
-    RecyclerView.ViewHolder(binder.root) {
-}
+    RecyclerView.ViewHolder(binder.root)
 
 interface IOnClickListener<T> {
-    fun onClick(t : T)
+    fun onClick(t: T)
 }

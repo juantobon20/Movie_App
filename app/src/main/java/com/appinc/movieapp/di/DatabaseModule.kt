@@ -17,13 +17,13 @@ import javax.inject.Singleton
 object DatabaseModule {
 
     @Provides
-    fun provideMovieDAO(movieDatabase: MovieDatabase) : MovieDAO = movieDatabase.movieDao()
+    fun provideMovieDAO(movieDatabase: MovieDatabase): MovieDAO = movieDatabase.movieDao()
 
     @Provides
-    fun provideVideoDAO(movieDatabase: MovieDatabase) : VideoDAO = movieDatabase.videoDao()
+    fun provideVideoDAO(movieDatabase: MovieDatabase): VideoDAO = movieDatabase.videoDao()
 
     @Provides
     @Singleton
-    fun providerMovieDatabase(@ApplicationContext appContext: Context) : MovieDatabase =
+    fun providerMovieDatabase(@ApplicationContext appContext: Context): MovieDatabase =
         Room.databaseBuilder(appContext, MovieDatabase::class.java, "Movie.db").build()
 }
