@@ -1,0 +1,38 @@
+name: Validate Lint
+
+on:
+  workflow_call:
+    secrets:
+      android_home:
+        required: true
+    outputs:
+      status:
+        value: ${{ jobs.lint.outputs.status }}
+
+jobs:
+  lint:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    outputs:
+      status: ${{ steps.set_output.outputs.status }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create local.properties
+        run: |
+          echo keystoreAlias=wallet >> local.properties
+          echo keystorePassword=wallet >> local.properties
+          echo keystorepath=wallet >> local.properties
+          echo mixpanelToken=wallet >> local.properties
+          echo sdk.dir=${{ secrets.android_home }} >> local.properties
+      - uses: actions/setup-java@v2
+        with:
+          distribution: temurin
+          java-version: 11
+          cache: gradle
+      - name: Lint
+        id: lint
+        run: ./gradlew ktlint --no-daemon
+      - name: set output
+        id: set_output
+        if: always()
+        run: echo ::set-output name=status::${{ job.status }}
