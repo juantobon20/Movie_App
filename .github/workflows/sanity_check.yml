@@ -2,7 +2,7 @@ name: Sanity Check
 
 on:
   push:
-    branches: [ master, develop ]
+    branches: [ develop ]
   workflow_dispatch:
 
 concurrency:
@@ -58,7 +58,7 @@ jobs:
         if: always()
         run: echo ::set-output name=status::${{ job.status }}
 
-notification:
+  notification:
     runs-on: ubuntu-latest
     needs: [ assemble, run_linter, run_unit_tests ]
     if: always()
@@ -84,3 +84,4 @@ notification:
           SLACK_TITLE: 'Sanity Check'
           SLACK_USERNAME: bot
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
