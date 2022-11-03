@@ -5,6 +5,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 apply from: '../ktlint.gradle'
+apply from: '../version.gradle'
 
 android {
     compileSdk 31

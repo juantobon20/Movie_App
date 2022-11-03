@@ -1,0 +1,17 @@
+ext {
+    debugApplicationName = "EC develop"
+    releaseApplicationName = "EC Wallet"
+    appVersionName = "${versionMajor}.${versionMinor}.${versionMicro}"
+    appCompileSdkVersion = 32
+    appMinSdkVersion = 23
+    appTargetSdkVersion = 32
+    appVersionCode = getReleaseVersionCode()
+}
+
+def getReleaseVersionCode() {
+    def minor = String.format("%02d", "${versionMinor}".toInteger())
+    def micro = String.format("%02d", "${versionMicro}".toInteger())
+    def buildNumber = String.format("%02d", "${buildNumber}".toInteger())
+    def versionResult = "${versionMajor}" + minor + micro + "${buildNumber}"
+    return versionResult.toInteger()
+}
