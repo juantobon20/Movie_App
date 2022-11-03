@@ -2,7 +2,7 @@ name: Sanity Check
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ master, develop ]
   workflow_dispatch:
 
 concurrency:
@@ -67,7 +67,7 @@ jobs:
         if: ${{ needs.assemble.outputs.status == 'success' && needs.run_linter.outputs.status == 'success' && needs.run_unit_tests.outputs.status == 'success' }}
         uses: rtCamp/action-slack-notify@v2.0.2
         env:
-          SLACK_CHANNEL: android
+          SLACK_CHANNEL: pruebas
           SLACK_COLOR: '#008000'
           SLACK_MESSAGE: 'Sanity check successful ${{ github.head_ref }}'
           SLACK_TITLE: 'Sanity Check'
@@ -78,7 +78,7 @@ jobs:
         if: ${{ needs.assemble.outputs.status != 'success' || needs.run_linter.outputs.status != 'success' || needs.run_unit_tests.outputs.status != 'success' }}
         uses: rtCamp/action-slack-notify@v2.0.2
         env:
-          SLACK_CHANNEL: android
+          SLACK_CHANNEL: pruebas
           SLACK_COLOR: '#FF0000'
           SLACK_MESSAGE: 'Sanity check failed ${{ github.head_ref }}'
           SLACK_TITLE: 'Sanity Check'
