@@ -45,7 +45,7 @@ class MainViewModel @Inject constructor(private val getMovieUseCase: GetMovieUse
         this._movies.postValue(movies)
     }
 
-    fun onFilterFavorite(){
+    fun onFilterFavorite() {
         val movies = moviesAll.filter { it.favorite }
         this._movies.postValue(movies)
     }

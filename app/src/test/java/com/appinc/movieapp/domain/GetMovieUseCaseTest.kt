@@ -1,17 +1,10 @@
 package com.appinc.movieapp.domain
 
 import com.appinc.movieapp.data.dao.MovieDAO
-import com.appinc.movieapp.data.model.Movie
 import com.appinc.movieapp.data.repository.MovieRepository
-import com.nhaarman.mockitokotlin2.mock
-import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import org.junit.Assert
 import org.junit.Before
-import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class GetMovieUseCaseTest {

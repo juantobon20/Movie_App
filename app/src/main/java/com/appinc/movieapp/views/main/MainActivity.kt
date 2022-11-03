@@ -32,9 +32,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         this.viewModel.movieId.observe(this) {
-            startActivity(Intent(this, DetailMovieActivity::class.java).apply {
-                putExtra("movieId", it)
-            })
+            startActivity(
+                Intent(this, DetailMovieActivity::class.java).apply {
+                    putExtra("movieId", it)
+                }
+            )
         }
     }
 
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         item.isChecked = true
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.op_favorite -> {
                 viewModel.onFilterFavorite()
             }

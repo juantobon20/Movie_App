@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object MovieRepositoryModule {
 
-    //Proveer Retrofit
+    // Proveer Retrofit
     @Singleton
     @Provides
     fun providerMovieRepository(

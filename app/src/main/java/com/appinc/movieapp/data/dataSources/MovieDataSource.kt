@@ -5,7 +5,7 @@ import com.appinc.movieapp.data.network.MovieResponse
 
 interface MovieDataSource {
 
-    suspend fun fetchPopularMovie() : MovieResponse?
+    suspend fun fetchPopularMovie(): MovieResponse?
 
     suspend fun findMovieById(movieId: Int): Movie?
 }

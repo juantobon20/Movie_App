@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class GetMovieUseCase @Inject constructor(
     private val movieRepository: MovieRepository,
-    //private val saveMovieUseCase: SaveMovieUseCase,
+    // private val saveMovieUseCase: SaveMovieUseCase,
     private val movieDAO: MovieDAO
 ) {
 
@@ -17,7 +17,7 @@ class GetMovieUseCase @Inject constructor(
         var movie = movieDAO.getMovieId(movieId)
         if (movie == null) {
             movie = movieRepository.getMovie(movieId)
-           // saveMovieUseCase(movie)
+            // saveMovieUseCase(movie)
         }
         return movie
     }
