@@ -1,0 +1,97 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+apply from: "$rootDir/version.gradle"
+apply from: "$rootDir/ktlint.gradle"
+apply plugin: 'dagger.hilt.android.plugin'
+
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
+
+android {
+    compileSdkVersion appCompileSdkVersion
+
+    defaultConfig {
+        minSdkVersion appMinSdkVersion
+        targetSdkVersion appTargetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    testOptions {
+        unitTests.all {
+            maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+        }
+
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    buildTypes {
+        debug {}
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        freeCompilerArgs = ["-Xallow-result-return-type", "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi", "-Xopt-in=kotlinx.coroutines.FlowPreview", "-Xopt-in=kotlin.contracts.ExperimentalContracts"]
+        jvmTarget = "1.8"
+    }
+
+    dexOptions {
+        preDexLibraries true
+    }
+}
+
+
+dependencies {
+
+    implementation kotlinJDK
+    implementation androidCore
+
+    //Support libraries
+    implementation appCompat
+    implementation cardView
+    implementation recyclerView
+    implementation design
+    implementation constraintLayout
+    implementation appCompatV4
+    implementation appCompat
+    implementation preferenceV7
+    implementation preferenceV14
+    implementation customTabs
+    implementation multidex
+
+    kapt daggerCompiler
+    kapt daggerAndroidProcessor
+
+    implementation hiltAndroid
+    kapt hiltCompiler
+
+
+    implementation arrow
+    implementation flagly
+
+    testImplementation mockk
+    testImplementation junit
+    testImplementation kluent
+    testImplementation project(":testutils")
+    testImplementation kotlinCoroutinesTest
+}
