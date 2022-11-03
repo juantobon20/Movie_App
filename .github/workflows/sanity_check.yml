@@ -1,0 +1,59 @@
+name: Sanity Check
+
+on:
+  push:
+    branches: [ develop ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  run_linter:
+    uses: ./.github/workflows/linter.yml
+    secrets:
+      android_home: ${{ secrets.ANDROID_HOME }}
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: run_linter
+    steps:
+      - run: echo ${{ needs.run_linter.outputs.status }}
+
+  run_unit_tests:
+    uses: ./.github/workflows/unit_tests.yml
+    secrets:
+      android_home: ${{ secrets.ANDROID_HOME }}
+
+  unit_tests:
+    runs-on: ubuntu-latest
+    needs: run_unit_tests
+    steps:
+      - run: echo ${{ needs.run_unit_tests.outputs.status }}
+
+  assemble:
+    runs-on: ubuntu-latest
+    outputs:
+      status: ${{ steps.set_output.outputs.status }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create local.properties
+        run: |
+          echo keystoreAlias=wallet >> local.properties
+          echo keystorePassword=wallet >> local.properties
+          echo keystorepath=wallet >> local.properties
+          echo mixpanelToken=wallet >> local.properties
+          echo sdk.dir=${{ secrets.ANDROID_HOME }} >> local.properties
+      - uses: actions/setup-java@v2
+        with:
+          distribution: temurin
+          java-version: 11
+          cache: gradle
+      - name: Build
+        run: |
+          ./gradlew assembleDebug --no-daemon
+      - name: set output
+        id: set_output
+        if: always()
+        run: echo ::set-output name=status::${{ job.status }}
