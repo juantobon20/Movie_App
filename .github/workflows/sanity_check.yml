@@ -2,7 +2,7 @@ name: Sanity Check
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ master, develop ]
   workflow_dispatch:
 
 concurrency:
