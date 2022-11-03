@@ -31,6 +31,8 @@ val CurrentVersion = Version.createFromProperties()
 val SourceBranch = "master"
 
 Hermes.display("current version: $CurrentVersion")
+Hermes.display("token: $token")
+Hermes.display("webHook $WebHookUrl")
 
 val branchName = "release/v$CurrentVersion"
 
