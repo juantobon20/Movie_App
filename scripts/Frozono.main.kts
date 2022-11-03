@@ -23,7 +23,7 @@ if(!args.contains(TokenArgumentKey) || !args.contains(WebHookKey)){
     throw IllegalStateException(usage)
 }
 
-val RepositoryUriAppendix = "github.com/cebroker/android-evercheck-wallet-2.0"
+val RepositoryUriAppendix = "github.com/juantobon20/Movie_App"
 val token = getArgument("--token")
 val WebHookUrl = getArgument("--webhook")
 val Repository = "https://$token@$RepositoryUriAppendix"
